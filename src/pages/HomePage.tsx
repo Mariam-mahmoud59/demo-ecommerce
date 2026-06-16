@@ -19,8 +19,9 @@ export function HomePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [progress, setProgress] = useState(0);
   const containerRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const gradientsRef = useRef<(HTMLDivElement | null)[]>([]);
   
   const targetScroll = useRef(0);
   const currentScroll = useRef(0);
@@ -39,11 +40,47 @@ export function HomePage() {
       targetScroll.current = p * (CARDS.length - 1);
     };
 
+    const updateCards = (p: number) => {
+      cardsRef.current.forEach((el, index) => {
+        if (!el) return;
+        const r = index - p;
+        let z = r * -280; 
+        let x = r * 140;  
+        let y = r * -40;  
+        let opacity = 1;
+
+        if (r < 0) {
+          z = r * 800; 
+          x = r * 200; 
+          y = r * 150; 
+          opacity = 1 + r; 
+        }
+
+        if (r > 6) {
+          opacity = Math.max(0, 1 - (r - 6) * 0.5);
+        }
+
+        const isVisible = r > -1.5 && r < 10;
+
+        el.style.display = isVisible ? 'block' : 'none';
+        if (isVisible) {
+          el.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
+          el.style.opacity = opacity.toString();
+          el.style.boxShadow = r > -0.5 ? '0 20px 50px rgba(0, 0, 0, 0.7)' : 'none';
+        }
+        
+        const grad = gradientsRef.current[index];
+        if (grad) {
+          grad.style.background = `linear-gradient(135deg, rgba(255,255,255,${r === 0 ? 0.05 : 0}) 0%, rgba(0,0,0,${Math.min(r * 0.1, 0.6)}) 100%)`;
+        }
+      });
+    };
+
     const renderLoop = () => {
       currentScroll.current += (targetScroll.current - currentScroll.current) * 0.08;
       
       if (Math.abs(targetScroll.current - currentScroll.current) > 0.001) {
-        setProgress(currentScroll.current);
+        updateCards(currentScroll.current);
       }
       
       animationFrameId.current = requestAnimationFrame(renderLoop);
@@ -111,48 +148,28 @@ export function HomePage() {
               <div className="hero__visual">
                 <div className="hero-3d-scene">
                   {CARDS.map((card, index) => {
-                    const r = index - progress;
-                    let z = r * -280; 
-                    let x = r * 140;  
-                    let y = r * -40;  
-                    let opacity = 1;
-
-                    if (r < 0) {
-                      z = r * 800; 
-                      x = r * 200; 
-                      y = r * 150; 
-                      opacity = 1 + r; 
-                    }
-
-                    if (r > 6) {
-                      opacity = Math.max(0, 1 - (r - 6) * 0.5);
-                    }
-
-                    const isVisible = r > -1.5 && r < 10;
-
                     return (
                       <div
                         key={card.id}
+                        ref={(el) => { cardsRef.current[index] = el; }}
                         className="hero-3d-card"
                         style={{
-                          display: isVisible ? 'block' : 'none',
-                          transform: `translate3d(${x}px, ${y}px, ${z}px)`,
                           zIndex: 100 - index,
-                          opacity: opacity,
-                          boxShadow: r > -0.5 ? '0 20px 50px rgba(0, 0, 0, 0.7)' : 'none',
-                          willChange: 'transform, opacity'
+                          willChange: 'transform, opacity',
+                          display: index === 0 ? 'block' : 'none' // initial state
                         }}
                       >
                         <img 
                           src={card.image} 
                           alt={`Layer ${index + 1}`}
                           className="hero-3d-img"
+                          loading="lazy"
                         />
                         
                         <div 
+                          ref={(el) => { gradientsRef.current[index] = el; }}
                           style={{
-                            position: 'absolute', inset: 0, pointerEvents: 'none',
-                            background: `linear-gradient(135deg, rgba(255,255,255,${r === 0 ? 0.05 : 0}) 0%, rgba(0,0,0,${Math.min(r * 0.1, 0.6)}) 100%)`
+                            position: 'absolute', inset: 0, pointerEvents: 'none'
                           }}
                         />
 
