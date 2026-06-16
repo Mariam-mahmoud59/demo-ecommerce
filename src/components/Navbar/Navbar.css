@@ -23,6 +23,7 @@
   letter-spacing: 0.12em; text-transform: uppercase;
   display: flex; align-items: center;
   color: var(--accent); /* Fallback */
+  white-space: nowrap;
 }
 .navbar__brand svg {
   color: var(--accent);
