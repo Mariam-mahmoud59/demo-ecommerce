@@ -66,12 +66,11 @@ export function HomePage() {
         if (isVisible) {
           el.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
           el.style.opacity = opacity.toString();
-          el.style.boxShadow = r > -0.5 ? '0 20px 50px rgba(0, 0, 0, 0.7)' : 'none';
         }
         
         const grad = gradientsRef.current[index];
         if (grad) {
-          grad.style.background = `linear-gradient(135deg, rgba(255,255,255,${r === 0 ? 0.05 : 0}) 0%, rgba(0,0,0,${Math.min(r * 0.1, 0.6)}) 100%)`;
+          grad.style.opacity = Math.min(r * 0.15, 0.6).toString();
         }
       });
     };
@@ -169,7 +168,10 @@ export function HomePage() {
                         <div 
                           ref={(el) => { gradientsRef.current[index] = el; }}
                           style={{
-                            position: 'absolute', inset: 0, pointerEvents: 'none'
+                            position: 'absolute', inset: 0, pointerEvents: 'none',
+                            background: '#000',
+                            opacity: 0,
+                            willChange: 'opacity'
                           }}
                         />
 
