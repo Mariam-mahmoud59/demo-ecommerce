@@ -183,6 +183,11 @@
 
 /* ─── RESPONSIVE ───────────────────────────────────────────────────── */
 @media (max-width: 768px) {
+  .navbar {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(16px);
+    border-bottom-color: var(--glass-border);
+  }
   .navbar__links, .navbar__auth-buttons { display: none; }
   .navbar__mobile-toggle { display: flex; }
 }

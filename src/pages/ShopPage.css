@@ -240,6 +240,8 @@ html[dir="rtl"] .shop-category-line {
   .shop-sticky-nav {
     margin-left: -24px;
     margin-right: -24px;
+  }
+  .shop-category-tabs {
     padding-left: 24px;
     padding-right: 24px;
   }

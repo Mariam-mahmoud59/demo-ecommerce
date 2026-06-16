@@ -20,8 +20,8 @@
 
 .hero-3d-scene {
   position: relative;
-  width: 280px;
-  height: 380px;
+  width: 220px;
+  height: 300px;
   transform-style: preserve-3d;
 }
 
@@ -581,7 +581,7 @@
 @media (max-width: 1024px) {
   .hero__grid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 24px;
   }
 
   .hero__text-content {
@@ -606,8 +606,13 @@
 }
 
 @media (max-width: 768px) {
+  .hero-3d-sticky {
+    align-items: flex-start;
+    padding-top: 90px;
+  }
+  
   .hero__container {
-    margin-top: 80px;
+    margin-top: 0;
   }
 
   .collections__grid {
