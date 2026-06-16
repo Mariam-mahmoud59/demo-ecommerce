@@ -95,12 +95,17 @@ export function Navbar() {
         <div className="navbar__inner">
           {/* Brand */}
           <button className="navbar__brand" onClick={() => go('/')}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '8px' }}>
-              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-              <polyline points="2 17 12 22 22 17"></polyline>
-              <polyline points="2 12 12 17 22 12"></polyline>
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+              <defs>
+                <linearGradient id="thetaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#4f46e5" />
+                  <stop offset="100%" stopColor="#0ea5e9" />
+                </linearGradient>
+              </defs>
+              <ellipse cx="16" cy="16" rx="9" ry="13" stroke="url(#thetaGrad)" strokeWidth="3" />
+              <path d="M2 11 Q 8 16 2 21 L 30 21 Q 24 16 30 11 Z" fill="url(#thetaGrad)" />
             </svg>
-            {t('brand', 'THETATEACH STORE')}
+            {t('brand', 'thetastore')}
           </button>
 
           {/* Desktop links */}

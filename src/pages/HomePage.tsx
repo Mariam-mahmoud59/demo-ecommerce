@@ -244,7 +244,7 @@ export function HomePage() {
         <RevealBox>
           <h2 style={{ fontSize: '32px', marginBottom: '20px' }}>{t('nav.about', 'About Us')}</h2>
           <p style={{ maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
-            Thetateach Store brings you the best quality clothing and accessories. We focus on premium materials, ethical manufacturing, and cutting-edge designs to elevate your everyday style.
+            thetastore brings you the best quality clothing and accessories. We focus on premium materials, ethical manufacturing, and cutting-edge designs to elevate your everyday style.
           </p>
         </RevealBox>
       </section>

@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { Product, CartItem } from '../types/product';
 
-const STORAGE_KEY = 'horizons-cart';
+const STORAGE_KEY = 'thetastore-cart';
 
 interface CartContextValue {
   items: CartItem[];
