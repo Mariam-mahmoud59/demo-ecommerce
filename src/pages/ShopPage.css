@@ -190,7 +190,7 @@ html[dir="rtl"] .shop-category-line {
 
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 24px;
 }
 
@@ -234,4 +234,13 @@ html[dir="rtl"] .shop-category-line {
   cursor: pointer;
   box-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
   z-index: 40;
+}
+
+@media (max-width: 768px) {
+  .shop-sticky-nav {
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
