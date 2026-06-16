@@ -60,12 +60,13 @@ export function HomePage() {
           opacity = Math.max(0, 1 - (r - 6) * 0.5);
         }
 
-        const isVisible = r > -1.5 && r < 10;
+        // Use visibility to avoid layout recalculation
+        const isVisible = r > -2 && opacity > 0;
+        el.style.visibility = isVisible ? 'visible' : 'hidden';
 
-        el.style.display = isVisible ? 'block' : 'none';
         if (isVisible) {
           el.style.transform = `translate3d(${x}px, ${y}px, ${z}px)`;
-          el.style.opacity = opacity.toString();
+          el.style.opacity = Math.max(0, opacity).toString();
         }
         
         const grad = gradientsRef.current[index];
@@ -155,7 +156,7 @@ export function HomePage() {
                         style={{
                           zIndex: 100 - index,
                           willChange: 'transform, opacity',
-                          display: index === 0 ? 'block' : 'none' // initial state
+                          visibility: index === 0 ? 'visible' : 'hidden'
                         }}
                       >
                         <img 
